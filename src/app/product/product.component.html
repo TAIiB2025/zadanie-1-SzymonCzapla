@@ -1,0 +1,34 @@
+<button (click)="toggleDetails()">
+    {{ showDetails ? 'Zwiń' : 'Rozwiń' }}
+  </button>
+  
+  <div *ngIf="showDetails; else miniView">
+    <table [ngClass]="{ 'promocja': produkt.czyPromocja }" border="1" cellpadding="8" style="text-align: center">
+        <colgroup>
+            <col style="width: 25%">
+            <col style="width: 20%">
+            <col>
+            <col>
+            <col>
+          </colgroup>
+        <tr>
+        <th>Nazwa</th>
+        <th>Cena</th>
+        <th>Data utworzenia</th>
+        <th>Liczba sztuk w koszyku</th>
+        <th>Dodaj do koszyka</th>
+      </tr>
+      <tr>
+        <td>{{ produkt.nazwa }}</td>
+        <td>{{ produkt.cena.toFixed(2) }} zł</td>
+        <td>{{ produkt.dataUtworzenia | date:'dd.MM.yyyy' }}r.</td>
+        <td>{{ iloscWKoszyku }}</td>
+        <td><button (click)="dodajDoKoszyka()">Dodaj do koszyka</button></td>
+      </tr>
+    </table>
+  </div>
+  
+  <ng-template #miniView>
+    <p><strong>{{ produkt.nazwa }}</strong></p>
+  </ng-template>
+  
